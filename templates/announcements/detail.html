@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}{{ announcement.title }}{% endblock %}
+
 {% block content %}
-<article class="announcement">
+<article class="announcement mb-4">
   <h2>{{ announcement.title }}</h2>
   <p class="meta">Posted: {{ announcement.created_at|date:'M j, Y H:i' }}</p>
 
@@ -13,7 +14,7 @@
     {{ announcement.content|linebreaks }}
   </div>
 
-  <button id="toggle" aria-expanded="false">Read more</button>
+  <button id="toggle" aria-expanded="false" class="btn btn-link p-0">Read more</button>
 </article>
 
 <script>
@@ -37,4 +38,52 @@
     });
   })();
 </script>
+
+<hr>
+
+<!-- Comments Section -->
+<h3>Comments</h3>
+{% if comments %}
+  <ul class="list-unstyled">
+    {% for comment in comments %}
+      <li class="mb-3 border-bottom pb-2">
+        <strong>{{ comment.name }}</strong> on {{ comment.created_at|date:"M j, Y H:i" }}<br>
+        {{ comment.body|linebreaks }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No comments yet. Be the first to comment!</p>
+{% endif %}
+
+<hr>
+
+<!-- Add Comment Form -->
+<h3>Add a Comment</h3>
+<form method="POST" novalidate>
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  
+  <div class="mb-3">
+    <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+    {{ form.name }}
+    {% if form.name.errors %}
+      <div class="text-danger small mt-1">
+        {{ form.name.errors|striptags }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label for="{{ form.body.id_for_label }}" class="form-label">Comment</label>
+    {{ form.body }}
+    {% if form.body.errors %}
+      <div class="text-danger small mt-1">
+        {{ form.body.errors|striptags }}
+      </div>
+    {% endif %}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit Comment</button>
+</form>
 {% endblock %}

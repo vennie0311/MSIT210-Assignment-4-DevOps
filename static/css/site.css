@@ -56,3 +56,32 @@ button {
     border:1px solid #ccc; 
     background:#fff; 
     cursor:pointer; }
+
+/* Form fields */
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Space between form groups */
+.mb-3 {
+    margin-bottom: 16px;
+}
+
+/* Textarea height */
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+/* Individual comment spacing */
+.comments li {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+}
