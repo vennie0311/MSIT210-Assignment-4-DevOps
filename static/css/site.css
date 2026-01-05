@@ -85,3 +85,9 @@ textarea {
     margin-bottom: 20px;
     padding-bottom: 12px;
 }
+/* Error highlighting */
+.has-error input,
+.has-error textarea {
+    border: 2px solid #dc3545;
+    background-color: #fff5f5;
+}
